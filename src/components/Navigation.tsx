@@ -10,13 +10,14 @@ import {
   Bot, 
   Workflow, 
   Layers,
-  Calendar
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
 
 interface NavigationProps {
   onStartBuildClick: () => void;
   onNavigateSection?: (section: string) => void;
-  activePage?: 'home' | 'about' | 'services' | 'case-studies' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy';
+  activePage?: string;
 }
 
 export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 'home' }: NavigationProps) {
@@ -25,36 +26,36 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
 
   const services = [
     {
-      title: "Autonomous AI Agents",
-      desc: "Multi-agent systems, LangGraph reasoning & tool calling pipelines.",
-      icon: Bot,
-      color: "#C88A32"
+      id: "service-websites",
+      title: "Websites",
+      desc: "Bespoke high-converting web apps, landing pages (React/Next.js, Webflow & Framer).",
+      icon: Globe,
+      color: "#59634B"
     },
     {
-      title: "Voice AI & Audio Systems",
-      desc: "Real-time conversational agents & telephony integration with ElevenLabs.",
-      icon: Rocket,
+      id: "service-mvp",
+      title: "MVP",
+      desc: "Fast-track Minimum Viable Products shipped in 2–4 weeks with Auth, DB & Payments.",
+      icon: Layers,
+      color: "#C98B35"
+    },
+    {
+      id: "service-ai-agents-automation",
+      title: "AI Agents & Automation",
+      desc: "Autonomous multi-agent pipelines, n8n workflows & operational task automation.",
+      icon: Bot,
       color: "#5F8A68"
     },
     {
-      title: "Full-Stack Web Apps & MVPs",
-      desc: "High-speed, conversion-focused React & Next.js platforms built to validate fast.",
-      icon: Globe,
+      id: "service-chatbots",
+      title: "Chatbot",
+      desc: "24/7 intelligent conversational bots, RAG knowledge retrieval & meeting booking.",
+      icon: MessageSquare,
       color: "#2563EB"
-    },
-    {
-      title: "Automated Workflows (n8n)",
-      desc: "Zero-maintenance background pipelines eliminating repetitive manual tasks.",
-      icon: Workflow,
-      color: "#36C5F0"
-    },
-    {
-      title: "System Integrations & APIs",
-      desc: "Connect CRMs, cloud databases, Google Workspace, and third-party APIs.",
-      icon: Layers,
-      color: "#6D28D9"
     }
   ];
+
+  const isServicesActive = activePage === 'service-websites' || activePage === 'service-mvp' || activePage === 'service-ai-agents-automation' || activePage === 'service-chatbots' || activePage === 'chatbots';
 
   return (
     <header className="sticky top-0 z-50 bg-[#F4EFE6]/95 backdrop-blur-md border-b border-[#282620]/8 transition-colors">
@@ -77,7 +78,7 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-[15px] font-[450] text-[#3C3B36]">
+        <nav className="hidden md:flex items-center gap-7 lg:gap-8 text-[15px] font-[450] text-[#3C3B36]">
           {/* Home Link */}
           <a 
             href="#" 
@@ -106,15 +107,15 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
           >
             <button 
               id="nav-services"
-              className={`relative flex items-center gap-1.5 py-1.5 transition-colors cursor-pointer font-[450] ${activePage === 'services' ? 'text-[#20201D] font-semibold' : 'hover:text-[#20201D]'}`}
+              className={`relative flex items-center gap-1.5 py-1.5 transition-colors cursor-pointer font-[450] ${isServicesActive ? 'text-[#20201D] font-semibold' : 'hover:text-[#20201D]'}`}
               onClick={() => {
                 setServicesOpen(false);
-                onNavigateSection && onNavigateSection("services");
+                onNavigateSection && onNavigateSection("service-websites");
               }}
             >
               <span>Services</span>
               <ChevronDown className={`w-3.5 h-3.5 text-[#817E74] transition-transform duration-200 ${servicesOpen ? 'rotate-180 text-[#C88A32]' : ''}`} />
-              {activePage === 'services' && (
+              {isServicesActive && (
                 <motion.span 
                   layoutId="activeNavLine" 
                   className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#C88A32] rounded-full" 
@@ -125,35 +126,31 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
 
             {/* Dropdown Menu */}
             {servicesOpen && (
-              <div className="absolute top-full -left-20 w-[420px] bg-[#FBF8F1] border border-[#DDD6C9] rounded-2xl shadow-[0_20px_50px_rgba(45,40,30,0.12)] p-4 grid grid-cols-1 gap-2.5 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                <div 
-                  onClick={() => {
-                    setServicesOpen(false);
-                    onNavigateSection && onNavigateSection("services");
-                  }}
-                  className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#EDE7DA] text-xs font-bold text-[#1E1D19] hover:bg-[#E5DEC7] transition-colors cursor-pointer"
-                >
-                  <span>Explore All Services</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#C88A32]" />
+              <div className="absolute top-full -left-12 w-[390px] bg-[#FBF8F1] border border-[#DDD6C9] rounded-2xl shadow-[0_20px_50px_rgba(45,40,30,0.12)] p-3 grid grid-cols-1 gap-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="px-2 pt-1 pb-1 text-[11px] font-mono font-bold uppercase tracking-wider text-[#8A877F]">
+                  Select Service
                 </div>
-                
                 {services.map((item, idx) => {
                   const Icon = item.icon;
+                  const isCurrentService = activePage === item.id || (item.id === 'service-chatbots' && activePage === 'chatbots');
                   return (
                     <div 
                       key={idx}
                       onClick={() => {
                         setServicesOpen(false);
-                        onNavigateSection && onNavigateSection("services");
+                        onNavigateSection && onNavigateSection(item.id);
                       }}
-                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#EEE8DC]/70 transition-colors cursor-pointer group"
+                      className={`flex items-start gap-3 p-2.5 rounded-xl transition-colors cursor-pointer group ${
+                        isCurrentService ? 'bg-[#EDE7DA] border border-[#DDD6C9]' : 'hover:bg-[#EEE8DC]/70'
+                      }`}
                     >
                       <div className="p-2 rounded-lg bg-[#EEE8DC] group-hover:bg-[#F4EFE6] text-[#20201D] transition-colors">
                         <Icon className="w-4 h-4 text-[#C88A32]" />
                       </div>
                       <div>
-                        <div className="text-xs font-bold text-[#20201D] group-hover:text-[#C88A32] transition-colors">
-                          {item.title}
+                        <div className="text-xs font-bold text-[#20201D] group-hover:text-[#C88A32] transition-colors flex items-center gap-1.5">
+                          <span>{item.title}</span>
+                          {isCurrentService && <span className="w-1.5 h-1.5 rounded-full bg-[#C88A32]" />}
                         </div>
                         <div className="text-[11px] text-[#62615B] leading-tight mt-0.5">
                           {item.desc}
@@ -165,6 +162,26 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
               </div>
             )}
           </div>
+
+          {/* How We Work Link */}
+          <a 
+            href="#how-we-work" 
+            id="nav-how-we-work"
+            onClick={(e) => { 
+              e.preventDefault(); 
+              onNavigateSection && onNavigateSection("how-we-work"); 
+            }}
+            className={`relative py-1.5 transition-colors ${activePage === 'how-we-work' ? 'text-[#20201D] font-semibold' : 'hover:text-[#20201D]'}`}
+          >
+            <span>How We Work</span>
+            {activePage === 'how-we-work' && (
+              <motion.span 
+                layoutId="activeNavLine" 
+                className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#C88A32] rounded-full" 
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+          </a>
 
           {/* Case Studies Link */}
           <a 
@@ -273,19 +290,44 @@ export function Navigation({ onStartBuildClick, onNavigateSection, activePage = 
               <span>Home</span>
             </a>
             
+            {/* Services Group in Mobile */}
+            <div className="py-1">
+              <div className="px-3 py-1.5 text-xs font-bold uppercase font-mono text-[#817E74]">
+                Services
+              </div>
+              <div className="space-y-1 mt-1">
+                {services.map((svc) => (
+                  <button
+                    key={svc.id}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onNavigateSection && onNavigateSection(svc.id);
+                    }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded-xl transition-colors flex items-center justify-between cursor-pointer ${
+                      activePage === svc.id ? 'bg-[#EDE7DA] font-bold text-[#C88A32]' : 'text-[#3C3B36] hover:bg-[#EDE7DA]'
+                    }`}
+                  >
+                    <span>{svc.title}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#C88A32]" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* How We Work */}
             <a 
-              href="#services" 
+              href="#how-we-work" 
               onClick={(e) => {
                 e.preventDefault();
                 setMobileMenuOpen(false);
-                onNavigateSection && onNavigateSection("services");
+                onNavigateSection && onNavigateSection("how-we-work");
               }} 
               className={`min-h-[44px] flex items-center justify-between px-3 py-2 rounded-xl transition-colors ${
-                activePage === 'services' ? 'bg-[#EDE7DA] font-bold text-[#C88A32]' : 'hover:bg-[#F4EFE6]'
+                activePage === 'how-we-work' ? 'bg-[#EDE7DA] font-bold text-[#C88A32]' : 'hover:bg-[#F4EFE6]'
               }`}
             >
-              <span>Services</span>
-              <span className="text-[11px] font-mono font-normal text-[#817E74]">5 Solutions</span>
+              <span>How We Work</span>
+              <span className="text-[11px] font-mono font-normal text-[#817E74]">5-Step Process</span>
             </a>
             
             <a 

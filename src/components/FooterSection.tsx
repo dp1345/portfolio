@@ -104,13 +104,13 @@ export function FooterSection({ onOpenInquiry, onNavigateSection }: FooterSectio
                 <span>Remote · Working worldwide</span>
               </div>
               <a 
-                href="https://wa.me/919876543210?text=Hi%20Dhrumi%2C%20I%20would%20like%20to%20discuss%20a%20project%20inquiry." 
+                href="https://wa.me/917016118861?text=Hi%20Dhrumi%2C%20I%20would%20like%20to%20discuss%20a%20project%20inquiry." 
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-3 hover:text-[#25D366] transition-colors duration-200"
               >
                 <span className="w-4 h-4 text-[#25D366] flex-shrink-0 flex items-center justify-center font-bold text-xs">💬</span>
-                <span>WhatsApp: +91 70161 18861</span>
+                <span>WhatsApp: +91 7016118861</span>
               </a>
               <a 
                 href="mailto:dhrumi858@gmail.com" 
@@ -156,16 +156,14 @@ export function FooterSection({ onOpenInquiry, onNavigateSection }: FooterSectio
           {/* Column 2: SERVICES */}
           <div>
             <h4 className="text-xs sm:text-sm font-bold font-mono tracking-[0.14em] uppercase text-[#D99A45] mb-5">
-              SERVICES
+              SERVICES & SOLUTIONS
             </h4>
             <ul className="space-y-3.5 text-sm">
               {[
-                { name: 'Autonomous AI Agents', link: 'services' },
-                { name: 'Voice AI & Audio Systems', link: 'services' },
-                { name: 'Full-Stack Web Apps & MVPs', link: 'services' },
-                { name: 'n8n Business Automation', link: 'services' },
-                { name: 'Cloud & API Integrations', link: 'services' },
-                { name: 'Performance & Optimization', link: 'services' }
+                { name: 'Websites', link: 'service-websites' },
+                { name: 'MVP (Minimum Viable Product)', link: 'service-mvp' },
+                { name: 'AI Agents & Automation', link: 'service-ai-agents-automation' },
+                { name: 'Chatbots (24/7 AI)', link: 'chatbots' }
               ].map((item) => (
                 <li key={item.name} className="border-b border-[#1C1B18] pb-2.5">
                   <button
@@ -187,9 +185,9 @@ export function FooterSection({ onOpenInquiry, onNavigateSection }: FooterSectio
             <ul className="space-y-3.5 text-sm">
               {[
                 { name: 'Home', link: 'home' },
+                { name: 'How We Work (5 Steps)', link: 'how-we-work' },
                 { name: 'Case Studies', link: 'case-studies' },
-                { name: 'About', link: 'about' },
-                { name: 'All Services & Packages', link: 'services' }
+                { name: 'About & Experience', link: 'about' }
               ].map((item) => (
                 <li key={item.name} className="border-b border-[#1C1B18] pb-2.5">
                   <button

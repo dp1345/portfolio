@@ -2,18 +2,8 @@ import React, { useState } from 'react';
 import { 
   Sparkles, 
   ArrowRight, 
-  ExternalLink, 
   CheckCircle2, 
-  Clock, 
-  Layers, 
-  Bot, 
-  Workflow, 
-  Globe, 
-  TrendingUp, 
-  ShieldCheck, 
-  X,
-  Code2,
-  Cpu
+  X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import yarnAndHookImg from '../../assets/images/yarn_and_hook_1787408119043.jpg';
@@ -366,122 +356,6 @@ export function CaseStudiesPage({ onOpenInquiry, onNavigate }: CaseStudiesPagePr
             </div>
           </motion.div>
         ))}
-
-        {/* In Progress / More Case Studies Coming Soon Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="rounded-3xl bg-[#EDE7DA] border-2 border-dashed border-[#DDD6C9] p-6 sm:p-10 lg:p-12 text-left relative overflow-hidden"
-        >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-[#DDD6C9]">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E5DEC7] border border-[#D5CDBC] text-xs font-mono font-bold uppercase tracking-wider text-[#555046] mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#C88A32] animate-ping" />
-                <span>In Progress · More Added Soon</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E1D19] tracking-tight mb-2">
-                More Case Studies Currently in Progress
-              </h2>
-              <p className="text-xs sm:text-sm text-[#555046] leading-relaxed">
-                We have several client systems, autonomous agent pipelines, and web applications currently deployed and undergoing documentation. Detailed writeups, metrics, and architecture walkthroughs will be published here soon.
-              </p>
-            </div>
-
-            <button
-              onClick={onOpenInquiry}
-              className="min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1E1D19] text-[#F4EFE6] text-xs font-semibold hover:bg-[#333129] active:scale-95 transition-all cursor-pointer self-start lg:self-auto shadow-sm whitespace-nowrap"
-            >
-              <span>Ask About Ongoing Builds</span>
-              <ArrowRight className="w-4 h-4 text-[#C88A32]" />
-            </button>
-          </div>
-
-          {/* Grid of In-Progress Case Study Teasers */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-8">
-            <div className="rounded-2xl bg-[#FBF8F1] border border-[#DDD6C9] p-5 flex flex-col justify-between space-y-3">
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#EDE7DA] text-[#6B665A] uppercase">
-                    Conversational AI
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold text-[#C88A32] flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    In Progress
-                  </span>
-                </div>
-                <h3 className="text-sm font-bold text-[#1E1D19] mb-1.5">
-                  Voice AI Phone Concierge & Dispatch
-                </h3>
-                <p className="text-xs text-[#625E54] leading-relaxed">
-                  Autonomous inbound phone triage, real-time voice synthesis, and direct calendar appointment booking with sub-800ms latency.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#EAE3D4] flex flex-wrap gap-1">
-                {['ElevenLabs', 'Twilio Voice', 'Node.js', 'WebSockets'].map((t, i) => (
-                  <span key={i} className="text-[10px] font-mono bg-[#EDE7DA] px-1.5 py-0.5 rounded text-[#555046]">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-[#FBF8F1] border border-[#DDD6C9] p-5 flex flex-col justify-between space-y-3">
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#EDE7DA] text-[#6B665A] uppercase">
-                    Operations & Relays
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold text-[#C88A32] flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    In Progress
-                  </span>
-                </div>
-                <h3 className="text-sm font-bold text-[#1E1D19] mb-1.5">
-                  Enterprise Multi-Platform Data Sync
-                </h3>
-                <p className="text-xs text-[#625E54] leading-relaxed">
-                  Automated background data pipeline syncing CRM records, Stripe invoices, inventory databases, and Slack dispatch notifications.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#EAE3D4] flex flex-wrap gap-1">
-                {['n8n', 'PostgreSQL', 'Stripe API', 'Webhooks'].map((t, i) => (
-                  <span key={i} className="text-[10px] font-mono bg-[#EDE7DA] px-1.5 py-0.5 rounded text-[#555046]">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-[#FBF8F1] border border-[#DDD6C9] p-5 flex flex-col justify-between space-y-3">
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#EDE7DA] text-[#6B665A] uppercase">
-                    AI Knowledge System
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold text-[#C88A32] flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    In Progress
-                  </span>
-                </div>
-                <h3 className="text-sm font-bold text-[#1E1D19] mb-1.5">
-                  Legal & Contract Intelligence Engine
-                </h3>
-                <p className="text-xs text-[#625E54] leading-relaxed">
-                  Document parsing system extracting clause risks, comparing terms against master agreements, and summarizing redlines.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-[#EAE3D4] flex flex-wrap gap-1">
-                {['LangGraph', 'Python', 'Vector DB', 'Claude 3.5'].map((t, i) => (
-                  <span key={i} className="text-[10px] font-mono bg-[#EDE7DA] px-1.5 py-0.5 rounded text-[#555046]">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* =================================================== */}

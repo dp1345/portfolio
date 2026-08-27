@@ -8,7 +8,11 @@ import { ServicesStorySection } from './components/services/ServicesStorySection
 import { CaseStudiesSection } from './components/CaseStudiesSection';
 import { ProcessSection } from './components/ProcessSection';
 import { AboutPage } from './components/AboutPage';
-import { ServicesPage } from './components/pages/ServicesPage';
+import { WebsitesServicePage } from './components/pages/services/WebsitesPage';
+import { MVPServicePage } from './components/pages/services/MVPPage';
+import { AIAgentsPage } from './components/pages/services/AIAgentsPage';
+import { ChatbotsPage } from './components/pages/services/ChatbotsPage';
+import { HowWeWorkPage } from './components/pages/HowWeWorkPage';
 import { CaseStudiesPage } from './components/pages/CaseStudiesPage';
 import { PrivacyPolicyPage } from './components/pages/PrivacyPolicyPage';
 import { TermsOfServicePage } from './components/pages/TermsOfServicePage';
@@ -17,7 +21,18 @@ import { FooterSection } from './components/FooterSection';
 import { ImprovementModal } from './components/ImprovementModal';
 import { TechLogosMarquee } from './components/TechLogosMarquee';
 
-type ActivePageType = 'home' | 'about' | 'services' | 'case-studies' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy';
+export type ActivePageType = 
+  | 'home' 
+  | 'about' 
+  | 'service-websites' 
+  | 'service-mvp' 
+  | 'service-ai-agents-automation' 
+  | 'chatbots' 
+  | 'how-we-work' 
+  | 'case-studies' 
+  | 'privacy-policy' 
+  | 'terms-of-service' 
+  | 'cookie-policy';
 
 export default function App() {
   const [activePage, setActivePage] = useState<ActivePageType>('home');
@@ -70,8 +85,29 @@ export default function App() {
       setActivePage('about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    else if (section === 'service-websites' || section === 'websites') {
+      setActivePage('service-websites');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    else if (section === 'service-mvp' || section === 'mvp') {
+      setActivePage('service-mvp');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    else if (section === 'service-ai-agents-automation' || section === 'ai-agents-automation' || section === 'ai-agents') {
+      setActivePage('service-ai-agents-automation');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    else if (section === 'chatbots' || section === 'service-chatbots') {
+      setActivePage('chatbots');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     else if (section === 'services' || section === 'services-story') {
-      setActivePage('services');
+      // Direct navigation to the first service (Websites) since generic Home/Services is removed
+      setActivePage('service-websites');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    else if (section === 'how-we-work') {
+      setActivePage('how-we-work');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (section === 'case-studies' || section === 'work') {
@@ -91,16 +127,8 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (section === 'how-i-work' || section === 'delivery') {
-      if (activePage !== 'home') {
-        setActivePage('home');
-        setTimeout(() => {
-          const el = document.getElementById('how-i-work') || document.getElementById('services-story');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      } else {
-        const el = document.getElementById('how-i-work') || document.getElementById('services-story');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
+      setActivePage('how-we-work');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       handleOpenImproveModal();
     }
@@ -136,10 +164,34 @@ export default function App() {
           onOpenInquiry={handleOpenImproveModal}
           onOpenWork={() => handleNavigate('case-studies')}
         />
-      ) : activePage === 'services' ? (
-        /* Render Custom Services Page */
-        <ServicesPage 
+      ) : activePage === 'service-websites' ? (
+        /* Render Home / Services / Websites Page */
+        <WebsitesServicePage 
           onOpenInquiry={handleOpenBuildModal}
+          onNavigate={handleNavigate}
+        />
+      ) : activePage === 'service-mvp' ? (
+        /* Render Home / Services / MVP Page */
+        <MVPServicePage 
+          onOpenInquiry={handleOpenBuildModal}
+          onNavigate={handleNavigate}
+        />
+      ) : activePage === 'service-ai-agents-automation' ? (
+        /* Render Home / Services / AI Agents & Automation Page */
+        <AIAgentsPage 
+          onOpenInquiry={handleOpenBuildModal}
+          onNavigate={handleNavigate}
+        />
+      ) : activePage === 'chatbots' || activePage === 'service-chatbots' ? (
+        /* Render Home / Services / Chatbot Page */
+        <ChatbotsPage 
+          onOpenInquiry={handleOpenBuildModal}
+          onNavigate={handleNavigate}
+        />
+      ) : activePage === 'how-we-work' ? (
+        /* Render How We Work Page */
+        <HowWeWorkPage 
+          onOpenInquiry={handleOpenImproveModal}
           onNavigate={handleNavigate}
         />
       ) : activePage === 'case-studies' ? (
@@ -234,7 +286,7 @@ export default function App() {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         initialMode={modalMode}
-        whatsappNumber="+91 70161 18861"
+        whatsappNumber="+91 7016118861"
       />
 
     </div>
